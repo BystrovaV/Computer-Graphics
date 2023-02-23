@@ -63,14 +63,38 @@
 
                 <div class="another-formats">
                     <div class="another-format another-format-1">
-                        <p id="label-1" class="label">HSV</p>
+                        <p id="label-1" class="label">RGB</p>
                         <input type="text" name="text-another-format-1" id="text-another-format-1" 
                         class="input_another-format input-color" disabled="disabled">
+                        <div class="tooltip">
+                            <button onclick="copy(this)" id="btn-1" onmouseout="outCopy(this)">
+                                <span class="tooltiptext" id="myTooltip-1">Copy to clipboard</span>
+                                Copy
+                            </button>
+                        </div>
                     </div>
                     <div class="another-format another-format-2">
-                        <p id="label-2" class="label">Lab</p>
+                        <p id="label-2" class="label">HSV</p>
                         <input type="text" name="text-another-format-2" id="text-another-format-2" 
                         class="input_another-format input-color" disabled="disabled">
+                        <div class="tooltip">
+                            <button onclick="copy(this)" id="btn-2" onmouseout="outCopy(this)">
+                                <span class="tooltiptext" id="myTooltip-2">Copy to clipboard</span>
+                                Copy
+                            </button>
+                        </div>
+                    </div>
+                    <div class="another-format another-format-3">
+                        <p id="label-3" class="label">Lab</p>
+                        <input type="text" name="text-another-format-3" id="text-another-format-3" 
+                        class="input_another-format input-color" disabled="disabled">
+
+                        <div class="tooltip">
+                            <button onclick="copy(this)" id="btn-3" onmouseout="outCopy(this)">
+                                <span class="tooltiptext" id="myTooltip-3">Copy to clipboard</span>
+                                Copy
+                            </button>
+                        </div>
                     </div>
                     <p id="attention"></p>
                 </div>

@@ -42,6 +42,7 @@ var color_3 = document.getElementById('color_3');
 
 var another_format_1 = document.getElementById("text-another-format-1");
 var another_format_2 = document.getElementById("text-another-format-2");
+var another_format_3 = document.getElementById("text-another-format-3");
 
 var attention = document.getElementById("attention");
 var pickedColor = document.getElementById("picked-color");
@@ -70,30 +71,31 @@ function onColorChange(color) {
   setup();
 }
 
+function outAnotherFormats() {
+  another_format_1.value = Math.round(rgb.R) + ", " + Math.round(rgb.G) + ", " + Math.round(rgb.B);
+  another_format_2.value = Math.round(hsv.H) + ", " + Math.round(hsv.S * 100) + "%, " +  Math.round(hsv.V * 100) + "%";
+  another_format_3.value = Math.round(lab.L) + ", " + Math.round(lab.a) + ", " +  Math.round(lab.b);
+}
+
 function setup() {
   if(selected.value == 'RGB') {
     color_1.value = rgb.R;
     color_2.value = rgb.G;
     color_3.value = rgb.B;
 
-    another_format_1.value =  Math.round(hsv.H) + ", " + Math.round(hsv.S * 100) + "%, " +  Math.round(hsv.V * 100) + "%";
-    another_format_2.value = Math.round(lab.L) + ", " + Math.round(lab.a) + ", " +  Math.round(lab.b);
-
+    outAnotherFormats();
   } else if (selected.value == 'HSV') {
     color_1.value = Math.round(hsv.H);
     color_2.value = Math.round(hsv.S * 100);
     color_3.value = Math.round(hsv.V * 100);
 
-    another_format_1.value = "rgb(" + Math.round(rgb.R) + ", " + Math.round(rgb.G) + ", " + Math.round(rgb.B) + ");";
-    another_format_2.value = Math.round(lab.L) + ", " + Math.round(lab.a) + ", " +  Math.round(lab.b);
-
+    outAnotherFormats();
   } else if (selected.value == "LAB") {
     color_1.value = Math.round(lab.L);
     color_2.value = Math.round(lab.a);
     color_3.value = Math.round(lab.b);
 
-    another_format_2.value =  Math.round(hsv.H) + ", " + Math.round(hsv.S * 100) + "%, " +  Math.round(hsv.V * 100) + "%";
-    another_format_1.value = "rgb(" + Math.round(rgb.R) + ", " + Math.round(rgb.G) + ", " + Math.round(rgb.B) + ");";
+    outAnotherFormats();
   }
 }
 
@@ -204,8 +206,7 @@ function changeColor() {
     xyz = rgb_to_xyz();
     xyz_to_lab(xyz);
 
-    another_format_1.value = Math.round(hsv.H) + ", " + Math.round(hsv.S * 100) + "%, " +  Math.round(hsv.V * 100) + "%";
-    another_format_2.value = Math.round(lab.L) + ", " + Math.round(lab.a) + ", " +  Math.round(lab.b);
+    outAnotherFormats();
   } else if (selected.value == 'HSV') {
     hsv.H = color_1.valueAsNumber;
     hsv.S = color_2.valueAsNumber / 100.0;
@@ -220,8 +221,7 @@ function changeColor() {
     xyz = rgb_to_xyz();
     xyz_to_lab(xyz);
 
-    another_format_1.value = "rgb(" + Math.round(rgb.R) + ", " + Math.round(rgb.G) + ", " + Math.round(rgb.B) + ");";
-    another_format_2.value = Math.round(lab.L) + ", " + Math.round(lab.a) + ", " +  Math.round(lab.b);
+    outAnotherFormats();
   } else if (selected.value == 'LAB') {
     lab.L = color_1.valueAsNumber;
     lab.a = color_2.valueAsNumber;
@@ -236,8 +236,7 @@ function changeColor() {
     colorPicker.color.rgb = {'r': rgb.R, 'g': rgb.G, 'b': rgb.B};
     colorPicker.on('color:change', onColorChange);
 
-    another_format_2.value =  Math.round(hsv.H) + ", " + Math.round(hsv.S * 100) + "%, " +  Math.round(hsv.V * 100) + "%";
-    another_format_1.value = "rgb(" + Math.round(rgb.R) + ", " + Math.round(rgb.G) + ", " + Math.round(rgb.B) + ");";
+    outAnotherFormats();
   }
 
   pickedColor.style.backgroundColor = "rgb(" + rgb.R + ", " + rgb.G + ", " + rgb.B + ")";
@@ -414,14 +413,36 @@ function fx_lab_to_xyz(x) {
 
 }
 
-// var lab = {'L':82, 'a':40, 'b':51};
-// var rgb = {'R':255, 'G':255, 'B':255};
-// test();
+function copy(button) {
+  var copyText;
+  var tooltip;
+  
+  if (button.id == "btn-1") {
+    copyText = document.getElementById("text-another-format-1");
+    tooltip = document.getElementById("myTooltip-1");
+  } else if (button.id == "btn-2") {
+    copyText = document.getElementById("text-another-format-2");
+    tooltip = document.getElementById("myTooltip-2");
+  } else if (button.id == "btn-3") {
+    copyText = document.getElementById("text-another-format-3");
+    tooltip = document.getElementById("myTooltip-3");
+  }else {
+    return;
+  }
 
-// function test() {
+  // Select the text field
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); // For mobile devices
 
-//   xyz = lab_to_xyz();
-//   console.log(xyz);
-//   xyz_to_rgb(xyz);
-//   console.log(rgb);
-// }
+  // Copy the text inside the text field
+  navigator.clipboard.writeText(copyText.value);
+  
+  
+  tooltip.innerHTML = "Copied!";
+}
+
+function outCopy(tooltip) {
+  // var tooltip = document.getElementsByClassName("");
+  tooltip.children[0].innerText = "Copy to clipboard";
+  // tooltip.innerHTML = "Copy to clipboard";
+}
