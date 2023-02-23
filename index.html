@@ -35,11 +35,15 @@
             </div>
 
             <div class="converter">
-                <select name="formats" id="formats" onchange="getSelectedFormat()">
-                    <option value="RGB">RGB</option>
-                    <option value="HSV">HSV</option>
-                    <option value="LAB">LAB</option>
-                </select>
+                <div class="top-panel">
+                    <select name="formats" id="formats" onchange="getSelectedFormat()">
+                        <option value="RGB">RGB</option>
+                        <option value="HSV">HSV</option>
+                        <option value="LAB">LAB</option>
+                    </select>
+
+                    <div id="picked-color"></div>
+                </div>
 
                 <div class="input-formats">
                     <div>

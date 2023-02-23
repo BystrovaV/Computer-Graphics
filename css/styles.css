@@ -45,7 +45,7 @@ h1, p, label, #attention {
   margin-bottom: 15px;
 }
 
-.input-formats {
+.input-formats, .top-panel {
   display: flex;
   flex-direction: row;
 
@@ -86,4 +86,15 @@ h1, p, label, #attention {
 
 .input_another-format {
   width: 150px;
+}
+
+#picked-color {
+  display: block;
+  width: 90px;
+  height: calc(2.25rem + 2px);
+
+  background-clip: padding-box;
+  border: 1px solid #bdbdbd;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }

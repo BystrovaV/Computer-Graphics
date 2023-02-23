@@ -44,6 +44,7 @@ var another_format_1 = document.getElementById("text-another-format-1");
 var another_format_2 = document.getElementById("text-another-format-2");
 
 var attention = document.getElementById("attention");
+var pickedColor = document.getElementById("picked-color");
 
 color_1.value = rgb.R;
 color_2.value = rgb.G;
@@ -57,6 +58,8 @@ function onColorChange(color) {
   rgb.R = color.rgb.r;
   rgb.G = color.rgb.g;
   rgb.B = color.rgb.b;
+
+  pickedColor.style.backgroundColor = "rgb(" + rgb.R + ", " + rgb.G + ", " + rgb.B + ")";
 
   var xyz;
 
@@ -236,6 +239,8 @@ function changeColor() {
     another_format_2.value =  Math.round(hsv.H) + ", " + Math.round(hsv.S * 100) + "%, " +  Math.round(hsv.V * 100) + "%";
     another_format_1.value = "rgb(" + Math.round(rgb.R) + ", " + Math.round(rgb.G) + ", " + Math.round(rgb.B) + ");";
   }
+
+  pickedColor.style.backgroundColor = "rgb(" + rgb.R + ", " + rgb.G + ", " + rgb.B + ")";
 }
 
 function rgb_to_hsv() {
