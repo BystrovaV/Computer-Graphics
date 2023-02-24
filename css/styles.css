@@ -88,7 +88,7 @@ h1, p, label, #attention {
   width: 150px;
 }
 
-#picked-color {
+#picked-color, .tooltip-btn {
   display: block;
   width: 90px;
   height: calc(2.25rem + 2px);
@@ -97,6 +97,11 @@ h1, p, label, #attention {
   border: 1px solid #bdbdbd;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.tooltip-btn {
+  width: 60px;
+  background-color:rgb(210, 199, 199);
 }
 
 .tooltip .tooltiptext::after {
@@ -135,4 +140,8 @@ h1, p, label, #attention {
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+}
+
+#attention {
+  font-size: 0.75rem;
 }

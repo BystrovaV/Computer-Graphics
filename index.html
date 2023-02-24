@@ -48,15 +48,18 @@
                 <div class="input-formats">
                     <div>
                         <label class="input-formats_label" id="label_1" for="color_1">R</label>
-                        <input type="number" name="color_1" id="color_1" class="input-color" oninput="changeColor()">
+                        <input type="number" name="color_1" id="color_1" class="input-color" oninput="changeColor()"
+                        min="0" max="255">
                     </div>
                     <div>
                         <label class="input-formats_label" id="label_2" for="color_2">G</label>
-                        <input type="number" name="color_2" id="color_2" class="input-color" oninput="changeColor()">
+                        <input type="number" name="color_2" id="color_2" class="input-color" oninput="changeColor()"
+                        min="0" max="255">
                     </div>
                     <div>
                         <label class="input-formats_label" id="label_3" for="color_3">B</label>
-                        <input type="number" name="color_3" id="color_3" class="input-color" oninput="changeColor()">
+                        <input type="number" name="color_3" id="color_3" class="input-color" oninput="changeColor()"
+                        min="0" max="255">
                     </div>
                     <!-- <button onclick="changeColor()">Подобрать</button> -->
                 </div>
@@ -67,7 +70,7 @@
                         <input type="text" name="text-another-format-1" id="text-another-format-1" 
                         class="input_another-format input-color" disabled="disabled">
                         <div class="tooltip">
-                            <button onclick="copy(this)" id="btn-1" onmouseout="outCopy(this)">
+                            <button onclick="copy(this)" id="btn-1" class="tooltip-btn" onmouseout="outCopy(this)">
                                 <span class="tooltiptext" id="myTooltip-1">Copy to clipboard</span>
                                 Copy
                             </button>
@@ -78,7 +81,7 @@
                         <input type="text" name="text-another-format-2" id="text-another-format-2" 
                         class="input_another-format input-color" disabled="disabled">
                         <div class="tooltip">
-                            <button onclick="copy(this)" id="btn-2" onmouseout="outCopy(this)">
+                            <button onclick="copy(this)" id="btn-2" class="tooltip-btn" onmouseout="outCopy(this)">
                                 <span class="tooltiptext" id="myTooltip-2">Copy to clipboard</span>
                                 Copy
                             </button>
@@ -90,7 +93,7 @@
                         class="input_another-format input-color" disabled="disabled">
 
                         <div class="tooltip">
-                            <button onclick="copy(this)" id="btn-3" onmouseout="outCopy(this)">
+                            <button onclick="copy(this)" id="btn-3" class="tooltip-btn" onmouseout="outCopy(this)">
                                 <span class="tooltiptext" id="myTooltip-3">Copy to clipboard</span>
                                 Copy
                             </button>

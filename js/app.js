@@ -147,9 +147,6 @@ function getSelectedFormat() {
     color_3.min = 0;
     color_3.max = 255;
 
-    label_1.innerText = "HSV";
-    label_2.innerText = "Lab";
-
     l1.innerText = "R";
     l2.innerText = "G";
     l3.innerText = "B";
@@ -160,9 +157,6 @@ function getSelectedFormat() {
     color_2.max = 100;
     color_3.min = 0;
     color_3.max = 100;
-    
-    label_1.innerText = "RGB";
-    label_2.innerText = "Lab";
 
     l1.innerText = "H";
     l2.innerText = "S";
@@ -174,9 +168,6 @@ function getSelectedFormat() {
     color_2.max = 128;
     color_3.min = -128;
     color_3.max = 128;
-
-    label_1.innerText = "RGB";
-    label_2.innerText = "HSV";
 
     l1.innerText = "L";
     l2.innerText = "A";
@@ -282,7 +273,7 @@ function hsv_to_rgb() {
 
   var z = (M - m) * (1 - Math.abs((hsv.H / 60)%2 - 1));
 
-  if (0 <= hsv.H && hsv.H < 60) {
+  if ((0 <= hsv.H && hsv.H < 60) || hsv.H == 360) {
     rgb.R = M;
     rgb.G = z + m;
     rgb.B = m;
