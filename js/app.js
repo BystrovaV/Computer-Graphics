@@ -183,6 +183,7 @@ function changeColor() {
   if (!validateColors()) {
     another_format_1.value = "Undefined";
     another_format_2.value = "Undefined";
+    another_format_3.value = "Undefined";
     return;
   }
 
