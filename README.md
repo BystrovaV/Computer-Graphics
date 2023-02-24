@@ -18,6 +18,5 @@
 2. Открыть `index.html`
 
 Или воспользоваться GitHub Pages по ссылке:
-```
+
 https://bystrovav.github.io/Lab-1-ColorConverter/
-```
