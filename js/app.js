@@ -188,11 +188,17 @@ function changeColor() {
   }
 
   if (selected.value == 'RGB') {
-    colorPicker.color.rgb = {'r': color_1.valueAsNumber, 'g': color_2.valueAsNumber, 'b': color_3.valueAsNumber};
-
     rgb.R = color_1.valueAsNumber;
     rgb.G = color_2.valueAsNumber;
     rgb.B = color_3.valueAsNumber;
+
+    colorPicker.off('color:change', onColorChange);
+    colorPicker.color.rgb = {'r': rgb.R, 'g': rgb.G, 'b': rgb.B};
+    colorPicker.on('color:change', onColorChange);
+
+    // rgb.R = color_1.valueAsNumber;
+    // rgb.G = color_2.valueAsNumber;
+    // rgb.B = color_3.valueAsNumber;
 
     rgb_to_hsv();
     xyz = rgb_to_xyz();
