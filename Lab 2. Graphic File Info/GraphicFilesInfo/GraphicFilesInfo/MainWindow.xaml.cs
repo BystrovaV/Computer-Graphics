@@ -67,34 +67,6 @@ namespace GraphicFilesInfo
             }
         }
 
-        private void SetInfo(string filename)
-        {
-            Bitmap bitmap = new Bitmap(filename);
-            int id;
-            string compression = "undefined";
-
-            try
-            {
-                id = BitConverter.ToInt16(bitmap.GetPropertyItem(0x0103).Value, 0);
-                CompressionTypes.TryGetValue(id, out compression);
-            }
-            catch {}
-
-            Dispatcher.Invoke(() =>
-            {
-                dataImages.Items.Add(new DataItem
-                {
-                    Name = filename,
-                    Size = bitmap.Width + "x" + bitmap.Height,
-                    Resolution = Math.Round(bitmap.HorizontalResolution) + "x" + Math.Round(bitmap.VerticalResolution),
-                    ColorDepth = GetColorDepth(bitmap.PixelFormat).ToString(),
-                    Compression = compression
-                });
-            });
-
-            bitmap.Dispose();
-        }
-
         private async void btnOpenFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -146,6 +118,34 @@ namespace GraphicFilesInfo
                     }
                 }
             }
+        }
+
+        private void SetInfo(string filename)
+        {
+            Bitmap bitmap = new Bitmap(filename);
+            int id;
+            string compression = "undefined";
+
+            try
+            {
+                id = BitConverter.ToInt16(bitmap.GetPropertyItem(0x0103).Value, 0);
+                CompressionTypes.TryGetValue(id, out compression);
+            }
+            catch { }
+
+            Dispatcher.Invoke(() =>
+            {
+                dataImages.Items.Add(new DataItem
+                {
+                    Name = filename,
+                    Size = bitmap.Width + "x" + bitmap.Height,
+                    Resolution = Math.Round(bitmap.HorizontalResolution) + "x" + Math.Round(bitmap.VerticalResolution),
+                    ColorDepth = GetColorDepth(bitmap.PixelFormat).ToString(),
+                    Compression = compression
+                });
+            });
+
+            bitmap.Dispose();
         }
 
         public void SetPcxInfo(string filename)

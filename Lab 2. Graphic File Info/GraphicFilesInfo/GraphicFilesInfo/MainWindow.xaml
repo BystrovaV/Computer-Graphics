@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Open File" Name="btnOpenFile" Margin="37,31,606.333,0" VerticalAlignment="Top" Click="btnOpenFile_Click"/>
+        <Button Content="Open File" Name="btnOpenFile" Margin="17,30,626.333,0" VerticalAlignment="Top" Click="btnOpenFile_Click"/>
         <DataGrid x:Name="dataImages" Margin="0,76,0.333,-0.333"/>
-        <Button Content="Open Folder" Name="btnOpenFolder" Margin="247,31,396.333,0" VerticalAlignment="Top" Click="btnOpenFolder_Click"/>
+        <Button Content="Open Folder" Name="btnOpenFolder" Margin="227,30,416.333,0" VerticalAlignment="Top" Click="btnOpenFolder_Click"/>
     </Grid>
 
 
