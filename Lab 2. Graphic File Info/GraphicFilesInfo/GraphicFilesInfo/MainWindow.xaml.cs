@@ -23,7 +23,7 @@ namespace GraphicFilesInfo
     {
         private static readonly HashSet<string> ImageExtensions = new HashSet<string>
         {
-            ".jpg", ".tiff", ".gif", ".bmp", ".png" ,".pcx"
+            ".jpg", ".tiff", ".gif", ".bmp", ".png" ,".pcx", ".jpeg", ".tif"
         };
 
         private static readonly Dictionary<long, string> CompressionTypes = new Dictionary<long, string>()
@@ -93,7 +93,7 @@ namespace GraphicFilesInfo
             }
         }
 
-        private void btnOpenFolder_Click(object sender, RoutedEventArgs e)
+        private async void btnOpenFolder_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new System.Windows.Forms.FolderBrowserDialog();
             dialog.ShowNewFolderButton = false;
@@ -106,17 +106,20 @@ namespace GraphicFilesInfo
                     .ToArray();
 
                 dataImages.Items.Clear();
-                foreach (var file in files)
+                await Task.Run(() =>
                 {
-                    if (file.Extension == ".pcx")
+                    foreach (var file in files)
                     {
-                        SetPcxInfo(file.FullName);
+                        if (file.Extension == ".pcx")
+                        {
+                            SetPcxInfo(file.FullName);
+                        }
+                        else
+                        {
+                            SetInfo(file.FullName);
+                        }
                     }
-                    else
-                    {
-                        SetInfo(file.FullName);
-                    }
-                }
+                });
             }
         }
 
