@@ -7,6 +7,7 @@ from matplotlib import pyplot as plt
 
 
 global image
+global image_gray
 
 
 def select_file():
@@ -31,6 +32,8 @@ def convert_to_tk_image(img):
 
 
 def equalization_rgb():
+    if image is None:
+        return
     blue, green, red = cv.split(image)
 
     blue = cv.equalizeHist(blue)
@@ -43,6 +46,8 @@ def equalization_rgb():
 
 
 def equalization_hsv():
+    if image is None:
+        return
     hsv = cv.cvtColor(image, cv.COLOR_BGR2HSV)
     h, s, v = cv.split(hsv)
 
@@ -55,6 +60,8 @@ def equalization_hsv():
 
 
 def linear_contrast(image):
+    if image is None:
+        return
     blue, green, red = cv.split(image)
     alpha1 = 255 / (blue.max() - blue.min())
     alpha2 = 255 / (green.max() - green.min())
@@ -69,6 +76,8 @@ def linear_contrast(image):
 
 
 def change_lc():
+    if image is None:
+        return
     lc_image = linear_contrast(image)
     lc_image = convert_to_tk_image(lc_image)
     image_new.configure(image=lc_image)
@@ -77,6 +86,8 @@ def change_lc():
 
 
 def conture():
+    if image is None:
+        return
     scale = 1
     delta = 0
     ddepth = cv.CV_16S
@@ -98,6 +109,8 @@ def conture():
 
 
 def spots():
+    if image is None:
+        return
     mask = np.full(shape=(3, 3), fill_value=-1)
     mask[1][1] = 8
     img_filter = cv.filter2D(image, -1, mask)
@@ -123,6 +136,8 @@ def change_image(image_name):
 
 
 def line_segmentation():
+    if image is None or image_gray is None:
+        return
     lsd = cv.createLineSegmentDetector(0)
     lines = lsd.detect(image_gray)[0]
     drawn_img = lsd.drawSegments(image_gray,lines)
@@ -137,6 +152,9 @@ def line_segmentation():
 window = tk.Tk()
 window.resizable(False, False)
 window.geometry("900x600")
+
+image = None
+image_gray = None
 
 f_top_1 = tk.Frame(window)
 f_top_1.pack(padx=5, pady=5)
@@ -168,12 +186,14 @@ button_seg_lines.pack(side=tk.LEFT, padx=5)
 open_button = tk.Button(window, width=20, text='Open Image', command=select_file)
 open_button.pack()
 
-image = cv.imread('Fig10.29(a).bmp')
-image_gray = cv.imread('Fig10.29(a).bmp', 0)
-imgtk = convert_to_tk_image(image)
-image_original = tk.Label(window, image= imgtk, height=300, width=400)
+# image = cv.imread('Fig10.29(a).bmp')
+# image_gray = cv.imread('Fig10.29(a).bmp', 0)
+# imgtk = convert_to_tk_image(image)
+# image_original = tk.Label(window, image= imgtk, height=300, width=400)
+image_original = tk.Label(window, height=300, width=400)
 image_original.pack(side="left")
-image_new = tk.Label(window, image= imgtk, height=300, width=400)
+# image_new = tk.Label(window, image= imgtk, height=300, width=400)
+image_new = tk.Label(window, height=300, width=400)
 image_new.pack(side="right")
 
 window.bind("<Return>", change_lc)
