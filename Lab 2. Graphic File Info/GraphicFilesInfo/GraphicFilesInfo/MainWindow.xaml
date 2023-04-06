@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GraphicFilesInfo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Graphics Files Info" Height="450" Width="800">
+    <Grid Background="AliceBlue">
         <Button Content="Open File" Name="btnOpenFile" Margin="17,30,626.333,0" VerticalAlignment="Top" Click="btnOpenFile_Click"/>
         <DataGrid x:Name="dataImages" Margin="0,76,0.333,-0.333"/>
         <Button Content="Open Folder" Name="btnOpenFolder" Margin="227,30,416.333,0" VerticalAlignment="Top" Click="btnOpenFolder_Click"/>
