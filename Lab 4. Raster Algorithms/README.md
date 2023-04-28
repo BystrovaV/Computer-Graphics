@@ -82,3 +82,9 @@ x = 0; y = r = 7; e = 3 - 2r = -11
 3. e > 0; e = e + 4(x-y) + 10 = -5; x = x + 1 = 3; y = y - 1 = 6; (3, 6)
 4. e < 0; e = e + 4x + 6 = 13; x = x + 1 = 4; (4, 6)
 5. e > 0; e = e + 4(x-y) + 10 = 15; x = x + 1 = 5; y = y - 1 = 5; (5, 5)
+
+## Время работы
+Step by step. Time spent: 0.0  
+Bresenham line. Time spent: 0.05164313316345215  
+DDA. Time spent: 0.03949570655822754  
+Bresenham circle. Time spent: 1.7198050022125244  
