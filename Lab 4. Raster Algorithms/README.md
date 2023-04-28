@@ -18,7 +18,7 @@ pip install matplotlib
 Для сборки в exe файл нужно дополнительно установить библиотеку PyInstaller
 ```
 pip install pyinstaller
-``
+```
 Для компиляции использовать следующую команду
 ```
 pyinstaller --onefile -w main.py
@@ -26,3 +26,4 @@ pyinstaller --onefile -w main.py
 
 ## Сопроводительная документация
 ### UI - приложения
+<img width="960" alt="Снимок" src="https://user-images.githubusercontent.com/79499241/235101727-fb845945-5c71-4917-a57a-bc63020f62c7.PNG">
