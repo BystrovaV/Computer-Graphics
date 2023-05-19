@@ -1,6 +1,8 @@
 import tkinter as tk
 from MainFrame import MainFrame
 import matplotlib
+import KirusBack
+import Segmentation
 matplotlib.use('TkAgg')
 
 window = tk.Tk()
