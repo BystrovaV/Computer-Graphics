@@ -1,9 +1,11 @@
 import math
 import matplotlib.pyplot as plt
 from matplotlib.widgets import Button, Slider
+import time
 
 
 def dda(x0, y0, x1, y1):
+    begin = time.time()
     dx = x1 - x0
     dy = y1 - y0
     steps = int(max(abs(dx), abs(dy)))
@@ -18,21 +20,29 @@ def dda(x0, y0, x1, y1):
         x += x_inc
         y += y_inc
 
+    end = time.time()
+    print('DDA. Time spent: {}'.format(end - begin))
+
     return points_x, points_y
 
 
 def step_by_step_algorithm(x, k, b, steps):
+    begin = time.time()
     x_arr, y_arr = [], []
 
-    for i in range(0, steps):
+    for i in range(0, int(steps)):
         x_arr.append(x)
         y_arr.append(round(k * x + b))
         x = x + 1
+
+    end = time.time()
+    print('Step by step. Time spent: {}'.format(end - begin))
 
     return x_arr, y_arr
 
 
 def bresenham_line_2(x0, y0, x1, y1):
+    begin = time.time()
     dx = abs(x1 - x0)
     dy = abs(y1 - y0)
     sx = 1 if x0 < x1 else -1
@@ -53,10 +63,14 @@ def bresenham_line_2(x0, y0, x1, y1):
             err += dx
             y0 += sy
 
+    end = time.time()
+    print('Bresenham line. Time spent: {}'.format(end - begin))
+
     return points_x, points_y
 
 
 def bresenham_circle(x0, y0, r):
+    begin = time.time()
     x, y = 0, r
     d = 3 - 2 * r
 
@@ -86,6 +100,9 @@ def bresenham_circle(x0, y0, r):
             y -= 1
         x += 1
 
+    end = time.time()
+    print('Bresenham circle. Time spent: {}'.format(end - begin))
+
     return points_x, points_y
 
 
@@ -94,8 +111,10 @@ def on_submit_click_0(event):
     graph_axes[0].clear()
     graph_axes[0].set_title('Bresenham circle')
     graph_axes[0].grid()
+    graph_axes[0].set_xlabel("x")
+    graph_axes[0].set_ylabel("y")
     x, y = bresenham_circle(slider_0_x.val, slider_0_y.val, slider_0_r.val)
-    graph_axes[0].plot(x, y, 'ko', markersize=1)
+    graph_axes[0].plot(x, y, 'bo', markersize=1)
     graph_axes[0].set_aspect('equal')
 
 
@@ -103,9 +122,11 @@ def on_submit_click_1(event):
     global graph_axes
     graph_axes[1].clear()
     graph_axes[1].set_title('DDA')
+    graph_axes[1].set_xlabel("x")
+    graph_axes[1].set_ylabel("y")
     graph_axes[1].grid()
     x, y = dda(slider_1_x0.val, slider_1_y0.val, slider_1_x1.val, slider_1_y1.val)
-    graph_axes[1].plot(x, y, 'ko', markersize=1)
+    graph_axes[1].plot(x, y, 'bo', markersize=1)
     graph_axes[1].set_aspect('equal')
 
 
@@ -113,9 +134,11 @@ def on_submit_click_2(event):
     global graph_axes
     graph_axes[2].clear()
     graph_axes[2].set_title('Bresenham line')
+    graph_axes[2].set_xlabel("x")
+    graph_axes[2].set_ylabel("y")
     graph_axes[2].grid()
     x, y = bresenham_line_2(int(slider_2_x0.val), int(slider_2_y0.val), int(slider_2_x1.val), int(slider_2_y1.val))
-    graph_axes[2].plot(x, y, 'ko', markersize=1)
+    graph_axes[2].plot(x, y, 'bo', markersize=1)
     graph_axes[2].set_aspect('equal')
 
 
@@ -124,8 +147,10 @@ def on_submit_click_3(event):
     graph_axes[3].clear()
     graph_axes[3].set_title('Step by step')
     graph_axes[3].grid()
+    graph_axes[3].set_xlabel("x")
+    graph_axes[3].set_ylabel("y")
     x, y = step_by_step_algorithm(slider_3_x0.val, slider_3_y0.val, slider_3_x1.val, slider_3_y1.val)
-    graph_axes[3].plot(x, y, 'ko', markersize=1)
+    graph_axes[3].plot(x, y, 'bo', markersize=1)
     graph_axes[3].set_aspect('equal')
 
 
@@ -138,7 +163,9 @@ fig.subplots_adjust(left=0.05, right=0.97, top=0.95, bottom=0.6, wspace=0.3)
 x, y = bresenham_circle(100, 100, 50)
 graph_axes[0].set_title('Bresenham circle')
 graph_axes[0].grid()
-graph_axes[0].plot(x, y, 'ko', markersize=1)
+graph_axes[0].set_xlabel("x")
+graph_axes[0].set_ylabel("y")
+graph_axes[0].plot(x, y, 'bo', markersize=1)
 graph_axes[0].set_aspect('equal')
 
 axes_button_submit_0 = plt.axes(
@@ -174,10 +201,12 @@ slider_0_r = Slider(axes_slider_0_r,
                     valfmt='%1.f')
 
 # ------------------------------- DDA 1 ---------------------------------------
-x, y = dda(100, 0, 0, 100)
+x, y = dda(1, 6, 9, 4)
 graph_axes[1].set_title('DDA')
 graph_axes[1].grid()
-graph_axes[1].plot(x, y, 'ko', markersize=1)
+graph_axes[1].set_xlabel("x")
+graph_axes[1].set_ylabel("y")
+graph_axes[1].plot(x, y, 'bo', markersize=1)
 graph_axes[1].set_aspect('equal')
 
 axes_button_submit_1 = plt.axes([graph_axes[1].get_position().x0 + graph_axes[1].get_position().width / 4, 0.25,
@@ -192,7 +221,7 @@ slider_1_x0 = Slider(axes_slider_1_x0,
                      label='x0',
                      valmin=-300,
                      valmax=300,
-                     valinit=100,
+                     valinit=1,
                      valfmt='%1.f')
 
 axes_slider_1_y0 = plt.axes([graph_axes[1].get_position().x0, 0.45,
@@ -201,7 +230,7 @@ slider_1_y0 = Slider(axes_slider_1_y0,
                      label='y0',
                      valmin=-300,
                      valmax=300,
-                     valinit=0,
+                     valinit=6,
                      valfmt='%1.f')
 
 axes_slider_1_x1 = plt.axes([graph_axes[1].get_position().x0, 0.40,
@@ -210,7 +239,7 @@ slider_1_x1 = Slider(axes_slider_1_x1,
                      label='x1',
                      valmin=-300,
                      valmax=300,
-                     valinit=0,
+                     valinit=9,
                      valfmt='%1.f')
 
 axes_slider_1_y1 = plt.axes([graph_axes[1].get_position().x0, 0.35,
@@ -219,14 +248,16 @@ slider_1_y1 = Slider(axes_slider_1_y1,
                      label='y1',
                      valmin=-300,
                      valmax=300,
-                     valinit=100,
+                     valinit=4,
                      valfmt='%1.f')
 
 # ------------------------------- BRESENHAM LINE 3 ---------------------------------------
-x, y = bresenham_line_2(100, 0, 0, 100)
+x, y = bresenham_line_2(1, 6, 9, 4)
 graph_axes[2].set_title('Bresenham line')
 graph_axes[2].grid()
-graph_axes[2].plot(x, y, 'ko', markersize=1)
+graph_axes[2].set_xlabel("x")
+graph_axes[2].set_ylabel("y")
+graph_axes[2].plot(x, y, 'bo', markersize=1)
 graph_axes[2].set_aspect('equal')
 
 axes_button_submit_2 = plt.axes([graph_axes[2].get_position().x0 + graph_axes[2].get_position().width / 4, 0.25,
@@ -240,7 +271,7 @@ slider_2_x0 = Slider(axes_slider_2_x0,
                      label='x0',
                      valmin=-300,
                      valmax=300,
-                     valinit=100,
+                     valinit=1,
                      valfmt='%0.0f')
 
 axes_slider_2_y0 = plt.axes([graph_axes[2].get_position().x0, 0.45,
@@ -249,7 +280,7 @@ slider_2_y0 = Slider(axes_slider_2_y0,
                      label='y0',
                      valmin=-300,
                      valmax=300,
-                     valinit=0,
+                     valinit=6,
                      valfmt='%0.0f')
 
 axes_slider_2_x1 = plt.axes([graph_axes[2].get_position().x0, 0.40,
@@ -258,7 +289,7 @@ slider_2_x1 = Slider(axes_slider_2_x1,
                      label='x1',
                      valmin=-300,
                      valmax=300,
-                     valinit=0,
+                     valinit=9,
                      valfmt='%0.0f')
 
 axes_slider_2_y1 = plt.axes([graph_axes[2].get_position().x0, 0.35,
@@ -267,14 +298,16 @@ slider_2_y1 = Slider(axes_slider_2_y1,
                      label='y1',
                      valmin=-300,
                      valmax=300,
-                     valinit=100,
+                     valinit=4,
                      valfmt='%0.0f')
 
 # ------------------------------- STEP BY STEP 4 ---------------------------------------
-x, y = step_by_step_algorithm(0, -1, 100, 100)
+x, y = step_by_step_algorithm(1, -0.25, 6.25, 9)
 graph_axes[3].set_title('Step by step')
 graph_axes[3].grid()
-graph_axes[3].plot(x, y, 'ko', markersize=1)
+graph_axes[3].set_xlabel("x")
+graph_axes[3].set_ylabel("y")
+graph_axes[3].plot(x, y, 'bo', markersize=1)
 graph_axes[3].set_aspect('equal')
 
 axes_button_submit_3 = plt.axes([graph_axes[3].get_position().x0 + graph_axes[3].get_position().width / 4, 0.25,
@@ -288,7 +321,7 @@ slider_3_x0 = Slider(axes_slider_3_x0,
                      label='x',
                      valmin=-300,
                      valmax=300,
-                     valinit=100,
+                     valinit=1,
                      valfmt='%1.f')
 
 axes_slider_3_y0 = plt.axes([graph_axes[3].get_position().x0, 0.45,
@@ -297,7 +330,7 @@ slider_3_y0 = Slider(axes_slider_3_y0,
                      label='k',
                      valmin=-50,
                      valmax=50,
-                     valinit=0,
+                     valinit=-0.25,
                      valfmt='%1.f')
 
 axes_slider_3_x1 = plt.axes([graph_axes[3].get_position().x0, 0.40,
@@ -306,7 +339,7 @@ slider_3_x1 = Slider(axes_slider_3_x1,
                      label='b',
                      valmin=-50,
                      valmax=50,
-                     valinit=0,
+                     valinit=6.25,
                      valfmt='%1.f')
 
 axes_slider_3_y1 = plt.axes([graph_axes[3].get_position().x0, 0.35,
@@ -315,6 +348,12 @@ slider_3_y1 = Slider(axes_slider_3_y1,
                      label='steps',
                      valmin=0,
                      valmax=300,
-                     valinit=100,
+                     valinit=9,
                      valfmt='%1.f')
+
+# step_by_step_algorithm(-10, 10000, 99995, 100)
+# bresenham_line_2(-10, -5, 90, 99995)
+# dda(-10, -5, 90, 99995)
+# bresenham_circle(100, 0, 1000000)
+
 plt.show()

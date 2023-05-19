@@ -17,7 +17,7 @@ def select_file():
     filename = fd.askopenfilename(
         title='Open a file',
         initialdir='/',
-        filetypes=filetypes)
+        filetypes=[("Images", "*.jpg *.jpeg *.bmp *.png")])
 
     change_image(filename)
 
@@ -150,6 +150,7 @@ def line_segmentation():
 
 
 window = tk.Tk()
+window.title("Image Processing")
 window.resizable(False, False)
 window.geometry("900x600")
 
